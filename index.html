@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社Re.Origin｜営業代行・営業支援</title>
+  <meta name="description" content="アポ獲得から商談・クロージングまで。営業のプロが貴社の成長を数字で押し上げる営業代行・営業支援サービス。株式会社Re.Origin。">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="株式会社Re.Origin｜営業代行・営業支援">
+  <meta property="og:description" content="アポ獲得から商談・クロージングまで。営業のプロが、貴社の成長を数字で押し上げます。">
+  <meta property="og:image" content="assets/ogp.jpg">
+  <meta property="og:url" content="https://k1999s1209-rgb.github.io/reorigin-site/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700&family=Noto+Sans+JP:wght@400;500;700&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- シグネチャー：スクロール進捗で伸びるゴールドの縦ライン -->
+  <div class="signature-line" aria-hidden="true"><span id="signatureProgress"></span></div>
+
+  <!-- ============ 固定ナビ ============ -->
+  <header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="assets/logo.png" alt="株式会社Re.Origin" width="238" height="86">
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="メインナビゲーション">
+        <a href="#mission">Mission</a>
+        <a href="#service">Service</a>
+        <a href="#strength">強み</a>
+        <a href="#company">会社概要</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ 6-1. ヒーロー ============ -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <p class="eyebrow hero-eyebrow">SALES OUTSOURCING</p>
+        <h1 class="hero-title">
+          <span class="hero-line"><span>売上の、</span></span>
+          <span class="hero-line"><span>最前線を担う。</span></span>
+        </h1>
+        <div class="hero-underline" aria-hidden="true"></div>
+        <p class="hero-sub">アポ獲得から商談まで。営業のプロが、貴社の成長を数字で押し上げます。</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-gold">お問い合わせ</a>
+          <a href="#service" class="btn btn-ghost">サービスを見る <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true"><span>SCROLL</span></div>
+    </section>
+
+    <!-- ============ 6-2. ミッション / ビジョン ============ -->
+    <section class="mission section" id="mission">
+      <div class="container">
+        <p class="eyebrow reveal">MISSION</p>
+        <h2 class="mission-statement reveal">「売る」を、正しく強く。</h2>
+        <p class="mission-body reveal">
+          小手先ではなく、本質的な価値を届ける営業を。<br>
+          私たちは代行を通じて、企業の成長と誠実な商いの両立を追求します。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 6-3. サービス（クリックスライダー） ============ -->
+    <section class="service section" id="service">
+      <div class="container">
+        <p class="eyebrow reveal">SERVICE</p>
+        <h2 class="section-title reveal">サービス内容</h2>
+
+        <div class="slider reveal" id="serviceSlider" tabindex="0" aria-roledescription="carousel" aria-label="サービス一覧">
+          <div class="slider-tabs" role="tablist">
+            <button class="slider-tab is-active" role="tab" aria-selected="true" data-index="0" id="tab-0" aria-controls="slide-0">
+              <span class="tab-num">01</span>アポイント獲得
+            </button>
+            <button class="slider-tab" role="tab" aria-selected="false" data-index="1" id="tab-1" aria-controls="slide-1">
+              <span class="tab-num">02</span>商談・クロージング代行
+            </button>
+            <button class="slider-tab" role="tab" aria-selected="false" data-index="2" id="tab-2" aria-controls="slide-2">
+              <span class="tab-num">03</span>営業支援・仕組み化
+            </button>
+            <span class="tab-indicator" id="tabIndicator" aria-hidden="true"></span>
+          </div>
+
+          <div class="slider-viewport">
+            <article class="slide is-active" id="slide-0" role="tabpanel" aria-labelledby="tab-0" data-index="0">
+              <p class="slide-num">01</p>
+              <h3 class="slide-title">アポイント獲得</h3>
+              <p class="slide-body">
+                広告運用・SNS・リスト設計など、複数チャネルを掛け合わせて商談機会を創出。
+                量を追うだけでなく、貴社の商材が刺さるターゲットを見極め、質の高いアポイントをお届けします。
+              </p>
+            </article>
+            <article class="slide" id="slide-1" role="tabpanel" aria-labelledby="tab-1" data-index="1" hidden>
+              <p class="slide-num">02</p>
+              <h3 class="slide-title">商談・クロージング代行</h3>
+              <p class="slide-body">
+                経験豊富な営業が商談の場に立ち、受注まで伴走。
+                初回商談から見積・条件交渉・クロージングまで、貴社の看板を背負う覚悟で成果に責任を持ちます。
+              </p>
+            </article>
+            <article class="slide" id="slide-2" role="tabpanel" aria-labelledby="tab-2" data-index="2" hidden>
+              <p class="slide-num">03</p>
+              <h3 class="slide-title">営業支援・仕組み化</h3>
+              <p class="slide-body">
+                トークスクリプト・SFA/CRM設計・営業育成まで支援。
+                「代行して終わり」ではなく、勝てる営業を貴社の中に残す。仕組み化と内製化までを設計します。
+              </p>
+            </article>
+          </div>
+
+          <div class="slider-arrows">
+            <button class="slider-arrow" id="prevSlide" aria-label="前のサービスへ">‹</button>
+            <button class="slider-arrow" id="nextSlide" aria-label="次のサービスへ">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6-4. 強み・特徴 ============ -->
+    <section class="strength section" id="strength">
+      <div class="container">
+        <p class="eyebrow reveal">STRENGTH</p>
+        <h2 class="section-title reveal">選ばれる理由</h2>
+
+        <div class="strength-cards">
+          <article class="strength-card reveal">
+            <p class="card-label">01 / READY</p>
+            <h3 class="card-title">即戦力</h3>
+            <p class="card-body">採用・教育コスト0で、経験豊富な営業チームが即稼働。立ち上がりの遅さという営業代行最大の不安を解消します。</p>
+          </article>
+          <article class="strength-card reveal">
+            <p class="card-label">02 / FLEXIBLE</p>
+            <h3 class="card-title">成果報酬型にも対応</h3>
+            <p class="card-body">固定＋成果のハイブリッドで、リスクを抑えた導入が可能。貴社のフェーズに合わせた契約形態を設計します。</p>
+          </article>
+          <article class="strength-card reveal">
+            <p class="card-label">03 / VISIBLE</p>
+            <h3 class="card-title">可視化</h3>
+            <p class="card-body">活動量・アポ・商談を数値でレポート。ブラックボックスにせず、判断に使えるデータをそのままお渡しします。</p>
+          </article>
+        </div>
+
+        <div class="strength-stats reveal">
+          <div class="stat">
+            <p class="stat-num"><span class="count" data-count="12000">0</span><span class="stat-unit">件</span></p>
+            <p class="stat-label">累計商談実績</p>
+          </div>
+          <div class="stat">
+            <p class="stat-num"><span class="count" data-count="64">0</span><span class="stat-unit">%</span></p>
+            <p class="stat-label">商談着座率</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6-5. 会社概要 ============ -->
+    <section class="company section" id="company">
+      <div class="container">
+        <p class="eyebrow reveal">COMPANY</p>
+        <h2 class="section-title reveal">会社概要</h2>
+
+        <dl class="company-table reveal">
+          <div class="company-row"><dt>会社名</dt><dd>株式会社Re.Origin</dd></div>
+          <div class="company-row"><dt>代表者</dt><dd>田中良祐、谷水勢</dd></div>
+          <div class="company-row"><dt>設立</dt><dd>2026年4月</dd></div>
+          <div class="company-row"><dt>資本金</dt><dd>30万円</dd></div>
+          <div class="company-row"><dt>所在地</dt><dd>東京都世田谷区松原2-37-18</dd></div>
+          <div class="company-row"><dt>事業内容</dt><dd>営業代行事業 / 営業支援・コンサルティング</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ 6-6. お問い合わせ ============ -->
+    <section class="contact section" id="contact">
+      <div class="container">
+        <p class="eyebrow reveal">CONTACT</p>
+        <h2 class="contact-title reveal">まずは、話を聞かせてください。</h2>
+        <p class="contact-body reveal">
+          営業の課題は、企業ごとに違います。<br>
+          現状を伺ったうえで、最適な体制と進め方をご提案します。
+        </p>
+        <div class="contact-cta reveal">
+          <a href="mailto:【info@example.com】" class="btn btn-gold btn-large">メールで問い合わせる</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 6-7. フッター ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-logo">
+        <img src="assets/logo.png" alt="株式会社Re.Origin" width="238" height="86">
+      </p>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="#mission">Mission</a>
+        <a href="#service">Service</a>
+        <a href="#strength">強み</a>
+        <a href="#company">会社概要</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="footer-copy">© 2026 Re.Origin Inc.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
