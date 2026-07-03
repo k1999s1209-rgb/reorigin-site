@@ -1,18 +1,24 @@
 /* =============================================
    営業代行会社 コーポレートサイト
-   ブラック × ゴールド（高級・信頼）
+   ホワイト × ブルー（清潔・信頼）＋クリック要素はゴールド
    ============================================= */
 
 /* ---------- デザイントークン ---------- */
 :root{
-  --bg:        #0A0A0B;  /* 基調の黒（やや暖色） */
-  --surface:   #141416;  /* カード・セクション差 */
-  --line:      #26241F;  /* 罫線・境界 */
-  --gold:      #C9A24B;  /* 主役のゴールド（真鍮寄り） */
-  --gold-hi:   #E8CD84;  /* ハイライト */
-  --gold-deep: #9A7B2E;  /* 陰・グラデ下端 */
-  --text:      #F5F3EE;  /* 本文（暖色オフホワイト） */
-  --muted:     #A8A29A;  /* 補足テキスト */
+  --bg:        #F7FAFD;  /* 基調の白（わずかに青み） */
+  --surface:   #FFFFFF;  /* カード・セクション差 */
+  --line:      #DCE6F2;  /* 罫線・境界 */
+  --blue:      #1E5FA8;  /* 主役のブルー（コーポレート） */
+  --blue-hi:   #5C93D1;  /* ハイライト */
+  --blue-deep: #123F73;  /* 陰・グラデ下端 */
+  --text:      #16283B;  /* 本文（濃紺） */
+  --muted:     #5C6E82;  /* 補足テキスト */
+  --blue-grad: linear-gradient(120deg,#5C93D1,#1E5FA8 45%,#123F73);
+
+  /* クリック要素専用のゴールド */
+  --gold:      #C9A24B;
+  --gold-hi:   #E8CD84;
+  --gold-deep: #9A7B2E;
   --gold-grad: linear-gradient(120deg,#E8CD84,#C9A24B 45%,#9A7B2E);
 
   --font-serif: "Shippori Mincho B1", serif;
@@ -45,7 +51,7 @@ a{ color: inherit; text-decoration: none; }
 button{ font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 
 :focus-visible{
-  outline: 2px solid var(--gold-hi);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
 }
 
@@ -57,6 +63,9 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 
 .section{ padding: 140px 0; }
 
+/* 文節単位でのみ折り返す（スマホの不自然な改行対策） */
+.u-phrase{ display: inline-block; }
+
 /* ---------- 共通パーツ ---------- */
 .eyebrow{
   font-family: var(--font-en);
@@ -64,7 +73,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--blue);
   margin-bottom: 20px;
 }
 
@@ -84,7 +93,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   top: 0.55em;
   width: 16px;
   height: 2px;
-  background: var(--gold-grad);
+  background: var(--blue-grad);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .7s cubic-bezier(.22,.8,.3,1) .35s;
@@ -99,18 +108,19 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   letter-spacing: 0.08em;
   padding: 16px 40px;
   border-radius: 2px;
-  transition: opacity .3s ease, box-shadow .3s ease, background-color .3s ease, color .3s ease;
+  transition: opacity .3s ease, box-shadow .3s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
   min-height: 44px;
 }
+/* クリック要素＝ゴールド */
 .btn-gold{
   background: var(--gold-grad);
-  color: #0A0A0B;
+  color: #16283B;
   font-weight: 700;
   position: relative;
   overflow: hidden;
 }
 .btn-gold:hover{
-  box-shadow: 0 0 24px rgba(201,162,75,.35);
+  box-shadow: 0 8px 24px rgba(201,162,75,.4);
 }
 /* ホバーで光が走るシーン（sheen） */
 .btn-gold::after{
@@ -120,7 +130,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   left: -70%;
   width: 45%;
   height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.6), transparent);
   transform: skewX(-20deg);
   transition: left .55s ease;
 }
@@ -128,11 +138,12 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 .btn-ghost{
   border: 1px solid var(--line);
   color: var(--text);
+  background: var(--surface);
   position: relative;
 }
 .btn-ghost:hover{
   border-color: var(--gold);
-  color: var(--gold-hi);
+  color: var(--gold-deep);
 }
 .btn-ghost .arrow{
   display: inline-block;
@@ -148,7 +159,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   left: 28px;
   width: 1px;
   height: 100vh;
-  background: rgba(201,162,75,.12);
+  background: rgba(30,95,168,.12);
   z-index: 50;
   pointer-events: none;
 }
@@ -156,7 +167,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--gold-grad);
+  background: var(--blue-grad);
   transform-origin: top;
   transform: scaleY(0);
 }
@@ -168,14 +179,15 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   left: 0;
   right: 0;
   z-index: 100;
-  transition: background-color .35s ease, backdrop-filter .35s ease, border-color .35s ease;
+  transition: background-color .35s ease, backdrop-filter .35s ease, border-color .35s ease, box-shadow .35s ease;
   border-bottom: 1px solid transparent;
 }
 .site-nav.is-scrolled{
-  background: rgba(10,10,11,.82);
+  background: rgba(255,255,255,.86);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom-color: var(--line);
+  box-shadow: 0 2px 16px rgba(18,63,115,.06);
 }
 .nav-inner{
   max-width: var(--container);
@@ -190,16 +202,14 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   display: flex;
   align-items: center;
 }
-/* ロゴ画像（黒文字×白地）を反転し、黒地に白ロゴとして溶け込ませる */
+/* ロゴ画像（黒文字）は白地にそのまま表示 */
 .nav-logo img,
 .footer-logo img{
   height: 34px;
   width: auto;
-  filter: invert(1);
-  mix-blend-mode: screen;
   transition: opacity .3s ease;
 }
-.nav-logo:hover img{ opacity: .8; }
+.nav-logo:hover img{ opacity: .7; }
 .nav-links{
   display: flex;
   align-items: center;
@@ -213,6 +223,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   position: relative;
   padding: 6px 0;
 }
+/* リンク（クリック要素）＝ゴールドの下線 */
 .nav-links a:not(.nav-cta)::after{
   content: "";
   position: absolute;
@@ -228,14 +239,14 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 .nav-links a:not(.nav-cta):hover::after{ transform: scaleX(1); }
 .nav-cta{
   border: 1px solid var(--gold);
-  color: var(--gold-hi);
+  color: var(--gold-deep);
   padding: 10px 26px !important;
   border-radius: 2px;
   transition: background-color .3s ease, color .3s ease;
 }
 .nav-cta:hover{
   background: var(--gold);
-  color: #0A0A0B;
+  color: #FFFFFF;
 }
 
 /* ハンバーガー */
@@ -267,8 +278,12 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   position: relative;
   padding: var(--nav-height) 0 80px;
   overflow: hidden;
+  /* 淡い青空＋遠景の山並み（薄い景色の背景） */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%23DCE9F6' d='M0,224L80,208C160,192,320,160,480,165.3C640,171,800,213,960,224C1120,235,1280,213,1360,202.7L1440,192L1440,320L0,320Z'/%3E%3Cpath fill='%23E9F2FB' opacity='0.85' d='M0,288L120,272C240,256,480,224,720,224C960,224,1200,256,1320,272L1440,288L1440,320L0,320Z'/%3E%3C/svg%3E") bottom center / 100% auto no-repeat,
+    linear-gradient(180deg, #D8EAFA 0%, #EDF5FC 55%, #F7FAFD 100%);
 }
-/* 背景にゆっくり漂うゴールドの光暈（アンビエント） */
+/* 太陽の光（暖色の光暈をやわらかく） */
 .hero::before,
 .hero::after{
   content: "";
@@ -281,21 +296,21 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   width: 640px;
   height: 640px;
   top: -180px;
-  right: -160px;
-  background: radial-gradient(circle, rgba(201,162,75,.10), transparent 65%);
-  animation: driftA 16s ease-in-out infinite alternate;
+  right: -120px;
+  background: radial-gradient(circle, rgba(255,214,140,.5), rgba(255,236,200,.22) 40%, transparent 65%);
+  animation: driftA 18s ease-in-out infinite alternate;
 }
 .hero::after{
   width: 480px;
   height: 480px;
   bottom: -200px;
   left: 8%;
-  background: radial-gradient(circle, rgba(154,123,46,.08), transparent 65%);
-  animation: driftB 20s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(92,147,209,.14), transparent 65%);
+  animation: driftB 22s ease-in-out infinite alternate;
 }
 @keyframes driftA{
   from{ transform: translate(0, 0) scale(1); }
-  to{ transform: translate(-90px, 70px) scale(1.15); }
+  to{ transform: translate(-60px, 50px) scale(1.1); }
 }
 @keyframes driftB{
   from{ transform: translate(0, 0) scale(1); }
@@ -328,7 +343,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 .hero-underline{
   width: 180px;
   height: 2px;
-  background: var(--gold-grad);
+  background: var(--blue-grad);
   margin: 36px 0;
   transform: scaleX(0);
   transform-origin: left;
@@ -364,7 +379,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   display: block;
   width: 1px;
   height: 48px;
-  background: var(--gold);
+  background: var(--blue);
   margin: 12px auto 0;
   animation: scrollPulse 2s ease infinite;
 }
@@ -401,6 +416,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 /* ---------- ミッション ---------- */
 .mission{
   border-top: 1px solid var(--line);
+  background: var(--surface);
   text-align: center;
 }
 .mission .eyebrow{ margin-bottom: 32px; }
@@ -442,15 +458,16 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   transition: color .3s ease;
   white-space: nowrap;
 }
+/* タブ（クリック要素）＝ゴールドの番号とインジケーター */
 .slider-tab .tab-num{
   font-family: var(--font-en);
   font-size: 13px;
   letter-spacing: 0.15em;
-  color: var(--gold);
+  color: var(--gold-deep);
   margin-right: 10px;
 }
 .slider-tab.is-active{ color: var(--text); }
-.slider-tab:hover{ color: var(--gold-hi); }
+.slider-tab:hover{ color: var(--gold-deep); }
 
 .tab-indicator{
   position: absolute;
@@ -490,7 +507,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   font-weight: 400;
   letter-spacing: 0.1em;
   line-height: 1;
-  background: var(--gold-grad);
+  background: var(--blue-grad);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -515,6 +532,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   gap: 12px;
   margin-top: 40px;
 }
+/* 矢印（クリック要素）＝ホバーでゴールド */
 .slider-arrow{
   width: 52px;
   height: 52px;
@@ -523,6 +541,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   font-size: 22px;
   line-height: 1;
   color: var(--muted);
+  background: var(--surface);
   transition: border-color .3s ease, color .3s ease, box-shadow .3s ease;
   display: flex;
   align-items: center;
@@ -530,13 +549,14 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 }
 .slider-arrow:hover{
   border-color: var(--gold);
-  color: var(--gold-hi);
-  box-shadow: 0 0 16px rgba(201,162,75,.2);
+  color: var(--gold-deep);
+  box-shadow: 0 4px 16px rgba(201,162,75,.25);
 }
 
 /* ---------- 強み ---------- */
 .strength{
   border-top: 1px solid var(--line);
+  background: var(--surface);
 }
 .strength-cards{
   display: grid;
@@ -544,7 +564,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   gap: 24px;
 }
 .strength-card{
-  background: var(--surface);
+  background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 44px 32px;
@@ -553,16 +573,16 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   transition: border-color .4s ease, opacity .8s ease, transform .5s cubic-bezier(.22,.8,.3,1), box-shadow .5s ease;
 }
 .strength-card:hover{
-  border-color: var(--gold-deep);
+  border-color: var(--blue-hi);
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  box-shadow: 0 16px 40px rgba(18,63,115,.12);
 }
-/* カーソルに追従するゴールドの光（JSが --mx / --my を更新） */
+/* カーソルに追従するブルーの光（JSが --mx / --my を更新） */
 .strength-card::before{
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(201,162,75,.10), transparent 60%);
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(30,95,168,.08), transparent 60%);
   opacity: 0;
   transition: opacity .4s ease;
   pointer-events: none;
@@ -573,7 +593,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   font-family: var(--font-en);
   font-size: 12px;
   letter-spacing: 0.2em;
-  color: var(--gold);
+  color: var(--blue);
   margin-bottom: 18px;
 }
 .card-title{
@@ -603,7 +623,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   font-size: clamp(44px, 6vw, 64px);
   font-weight: 400;
   line-height: 1.1;
-  background: linear-gradient(110deg, #9A7B2E, #C9A24B 35%, #E8CD84 50%, #C9A24B 65%, #9A7B2E);
+  background: linear-gradient(110deg, #123F73, #1E5FA8 35%, #5C93D1 50%, #1E5FA8 65%, #123F73);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -637,10 +657,10 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   padding: 26px 8px;
   border-bottom: 1px solid var(--line);
 }
-.company-row:first-child{ border-top: 1px solid var(--gold-deep); }
+.company-row:first-child{ border-top: 1px solid var(--blue); }
 .company-row dt{
   font-weight: 500;
-  color: var(--gold-hi);
+  color: var(--blue-deep);
   letter-spacing: 0.08em;
 }
 .company-row dd{ color: var(--text); }
@@ -648,6 +668,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 /* ---------- お問い合わせ ---------- */
 .contact{
   border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface), #EDF5FC);
   text-align: center;
   padding-bottom: 180px;
 }
@@ -666,6 +687,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 /* ---------- フッター ---------- */
 .site-footer{
   border-top: 1px solid var(--line);
+  background: var(--surface);
   padding: 56px 0;
 }
 .footer-inner{
@@ -694,7 +716,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   transition: color .3s ease;
   padding: 4px 0;
 }
-.footer-links a:hover{ color: var(--gold-hi); }
+.footer-links a:hover{ color: var(--gold-deep); }
 .footer-copy{
   font-family: var(--font-en);
   font-size: 12px;
@@ -720,6 +742,9 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   .section{ padding: 88px 0; }
   .signature-line{ display: none; }
 
+  /* PC専用の改行はスマホでは無効化（不自然な折り返し対策） */
+  .pc-only{ display: none; }
+
   /* ナビ → ハンバーガー */
   .nav-toggle{ display: flex; }
   .nav-links{
@@ -730,7 +755,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
-    background: rgba(10,10,11,.96);
+    background: rgba(255,255,255,.97);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
@@ -760,6 +785,10 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   .hero-cta{ flex-direction: column; align-items: stretch; }
   .hero-cta .btn{ text-align: center; }
   .hero-scroll{ display: none; }
+
+  /* 見出しの文字サイズをスマホ幅に最適化（途中折れ防止） */
+  .mission-statement{ font-size: clamp(26px, 8vw, 32px); }
+  .contact-title{ font-size: clamp(24px, 7vw, 28px); }
 
   .slider-tabs{
     overflow-x: auto;
