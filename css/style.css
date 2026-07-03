@@ -202,12 +202,11 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   display: flex;
   align-items: center;
 }
-/* ロゴ画像（黒文字）。multiplyで白地を透過扱い＝白枠を出さない */
+/* ロゴ画像（透過PNG・濃紺） */
 .nav-logo img,
 .footer-logo img{
   height: 34px;
   width: auto;
-  mix-blend-mode: multiply;
   transition: opacity .3s ease;
 }
 .nav-logo:hover img{ opacity: .7; }
@@ -218,9 +217,10 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
 }
 .nav-links a{
   font-family: var(--font-en);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--text);
   position: relative;
   padding: 6px 0;
 }
@@ -295,7 +295,6 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   width: auto;
   opacity: 0;
   animation: fadeUp .8s ease .1s forwards;
-  mix-blend-mode: multiply; /* ロゴPNGの白地を透過扱いにして白枠を消す */
 }
 .hero-eyebrow{
   opacity: 0;
