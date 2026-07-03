@@ -202,11 +202,12 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   display: flex;
   align-items: center;
 }
-/* ロゴ画像（黒文字）は白地にそのまま表示 */
+/* ロゴ画像（黒文字）。multiplyで白地を透過扱い＝白枠を出さない */
 .nav-logo img,
 .footer-logo img{
   height: 34px;
   width: auto;
+  mix-blend-mode: multiply;
   transition: opacity .3s ease;
 }
 .nav-logo:hover img{ opacity: .7; }
@@ -282,7 +283,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   /* 実写の朝日と山並み。白のオーバーレイで薄く上品に（下端はページ基調色へ溶ける） */
   background:
     linear-gradient(180deg, rgba(247,250,253,.30) 0%, rgba(247,250,253,.62) 45%, rgba(247,250,253,.92) 78%, #F7FAFD 100%),
-    url("../assets/hero.jpg") center top / cover no-repeat,
+    url("../assets/hero_bg.jpg") center top / cover no-repeat,
     linear-gradient(180deg, #D8EAFA 0%, #F7FAFD 100%);
 }
 .hero .container{ position: relative; z-index: 1; }
@@ -294,6 +295,7 @@ button{ font: inherit; color: inherit; background: none; border: none; cursor: p
   width: auto;
   opacity: 0;
   animation: fadeUp .8s ease .1s forwards;
+  mix-blend-mode: multiply; /* ロゴPNGの白地を透過扱いにして白枠を消す */
 }
 .hero-eyebrow{
   opacity: 0;
