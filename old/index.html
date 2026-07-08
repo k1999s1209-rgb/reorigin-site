@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社Re.Origin｜営業仕組み化・組織強化支援</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:    #096FCA;
+      --beige:   #E7DDDB;
+      --white:   #ffffff;
+      --gray-lt: #F4F4F4;
+      --gray-md: #D5D5D5;
+      --gray-dk: #888888;
+      --text:    #333333;
+      --ease:    cubic-bezier(0.16, 1, 0.3, 1);
+      --dur:     0.7s;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── Appear animation ── */
+    .appear {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+    .appear.in { opacity: 1; transform: translateY(0); }
+    .appear.d1 { transition-delay: 0.08s; }
+    .appear.d2 { transition-delay: 0.16s; }
+    .appear.d3 { transition-delay: 0.24s; }
+    .appear.d4 { transition-delay: 0.32s; }
+    .appear.d5 { transition-delay: 0.40s; }
+    .appear.d6 { transition-delay: 0.48s; }
+    .appear.d7 { transition-delay: 0.56s; }
+    .appear.d8 { transition-delay: 0.64s; }
+
+    /* ── Header ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4%;
+      z-index: 200;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid var(--gray-md);
+      backdrop-filter: blur(8px);
+    }
+    .logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+    .header-right { display: flex; align-items: center; gap: 40px; }
+    nav { display: flex; gap: 36px; }
+    nav a {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--blue); }
+    .btn-join {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blue);
+      color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 13px 28px;
+      letter-spacing: 0.06em;
+      border-radius: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .btn-join:hover { opacity: 0.82; }
+    .btn-join::after { content: '→'; font-family: 'Inter', sans-serif; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: background 0.2s; }
+
+    /* ── Shared section label ── */
+    .sec-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .sec-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      margin-bottom: 32px;
+    }
+    .sec-title.blue { color: var(--blue); }
+    .sec-desc {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #555;
+      letter-spacing: 0.04em;
+      max-width: 600px;
+    }
+    .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 5%;
+      position: relative;
+    }
+
+    /* ── HERO (KV) ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--beige);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      clip-path: polygon(0 0, 100% 0, 100% 91%, 0 100%);
+    }
+    .hero-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 5% 160px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-kv-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(72px, 16vw, 220px);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-left: -0.03em;
+      margin-bottom: 56px;
+    }
+    .hero-sub-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-catch {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.5;
+      letter-spacing: 0.03em;
+    }
+    .hero-desc {
+      font-size: 14px;
+      line-height: 2;
+      color: #555;
+      letter-spacing: 0.05em;
+      max-width: 440px;
+      padding-top: 8px;
+    }
+
+    /* ── circle motif ── */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--blue);
+      pointer-events: none;
+    }
+    .circle-hero {
+      width: clamp(80px, 10vw, 140px);
+      height: clamp(80px, 10vw, 140px);
+      right: 8%;
+      top: 38%;
+    }
+
+    /* ── Vertical text ── */
+    .vertical-text {
+      position: absolute;
+      right: 3.5%;
+      bottom: 18%;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(18px, 2.4vw, 32px);
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.15em;
+      line-height: 1;
+      z-index: 3;
+      opacity: 0.85;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--white);
+      margin-top: -1px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .about-body {
+      font-size: 15px;
+      line-height: 2;
+      color: #555;
+      letter-spacing: 0.04em;
+    }
+    .about-body + .about-body { margin-top: 24px; }
+    .about-right {
+      padding-top: 8px;
+    }
+    .philosophy-block {
+      border-left: 3px solid var(--blue);
+      padding-left: 28px;
+      margin-bottom: 40px;
+    }
+    .philosophy-block p {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(20px, 2.8vw, 34px);
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1.5;
+      letter-spacing: 0.03em;
+    }
+    .about-note {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #666;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SERVICE ── */
+    #service { background: var(--gray-lt); position: relative; }
+    .service-header { margin-bottom: 56px; }
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .plan-card {
+      background: var(--white);
+      padding: 36px 32px;
+      transition: background 0.25s;
+      position: relative;
+    }
+    .plan-card:hover { background: #f8fbff; }
+    .plan-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 32px; right: 32px;
+      height: 1px;
+      background: var(--gray-md);
+    }
+    .plan-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+    }
+    .plan-name {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .plan-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.01em;
+      margin-bottom: 4px;
+    }
+    .plan-price span {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-dk);
+    }
+    .plan-period {
+      font-size: 12px;
+      color: var(--gray-dk);
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+    }
+    .plan-divider { border: none; border-top: 1px solid var(--gray-md); margin-bottom: 16px; }
+    .plan-content {
+      font-size: 13px;
+      line-height: 1.9;
+      color: #666;
+      letter-spacing: 0.04em;
+    }
+    .plan-content li { padding-left: 12px; position: relative; }
+    .plan-content li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 10px;
+    }
+    .plan-note {
+      font-size: 12px;
+      color: var(--gray-dk);
+      margin-top: 24px;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    /* ── FLOW ── */
+    #flow { background: var(--white); }
+    .flow-list { margin-top: 56px; }
+    .flow-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--gray-md);
+    }
+    .flow-item:first-child { border-top: 1px solid var(--gray-md); }
+    .flow-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--blue);
+      opacity: 0.18;
+      line-height: 1;
+    }
+    .flow-body h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+    .flow-body p {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #666;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FAQ ── */
+    #faq { background: var(--beige); }
+    .faq-list { margin-top: 56px; }
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+      padding: 32px 0;
+    }
+    .faq-item:first-child { border-top: 1px solid rgba(0,0,0,0.12); }
+    .faq-q {
+      display: flex;
+      gap: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+      align-items: baseline;
+    }
+    .faq-q .q-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    .faq-a {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #555;
+      letter-spacing: 0.04em;
+      padding-left: 32px;
+    }
+
+    /* ── COMPANY ── */
+    #company { background: var(--white); }
+    .company-table {
+      width: 100%;
+      max-width: 720px;
+      border-collapse: collapse;
+      margin-top: 56px;
+    }
+    .company-table tr { border-bottom: 1px solid var(--gray-md); }
+    .company-table th {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-dk);
+      letter-spacing: 0.08em;
+      padding: 22px 0;
+      width: 160px;
+      vertical-align: top;
+      text-align: left;
+    }
+    .company-table td {
+      font-size: 15px;
+      color: var(--text);
+      padding: 22px 0;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--blue);
+      clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -80px;
+      padding-top: 80px;
+    }
+    #contact .inner { padding: 120px 5% 100px; }
+    .contact-heading {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+    .contact-note {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 44px;
+      letter-spacing: 0.05em;
+      line-height: 1.9;
+    }
+    .contact-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+    .btn-white-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--blue);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 16px 40px;
+      letter-spacing: 0.06em;
+      border-radius: 0;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .btn-white-solid:hover { opacity: 0.88; }
+    .btn-white-solid::after { content: ' →'; font-family: 'Inter', sans-serif; }
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.7);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 16px 40px;
+      letter-spacing: 0.06em;
+      border-radius: 0;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .btn-outline-white:hover { opacity: 0.7; }
+    .contact-info {
+      padding-top: 44px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .contact-info p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.06em;
+      line-height: 2;
+    }
+    .contact-info a { color: rgba(255,255,255,0.75); text-decoration: underline; }
+    .contact-info a:hover { color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      padding: 44px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.08em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: #444;
+      letter-spacing: 0.04em;
+      margin-top: 8px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .plan-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .btn-join { display: none; }
+      .hamburger { display: flex; }
+      .inner { padding: 80px 5%; }
+      #hero { clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%); }
+      .hero-kv-text { margin-left: -0.01em; }
+      .hero-sub-wrap { flex-direction: column; gap: 24px; }
+      .vertical-text { display: none; }
+      .flow-item { grid-template-columns: 56px 1fr; gap: 16px; }
+      .flow-num { font-size: 36px; }
+      #contact { clip-path: polygon(0 2%, 100% 0, 100% 100%, 0 100%); }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header id="site-header">
+  <a href="#" class="logo">Re.Origin</a>
+  <div class="header-right">
+    <nav>
+      <a href="#about">ABOUT</a>
+      <a href="#service">SERVICE</a>
+      <a href="#flow">FLOW</a>
+      <a href="#company">COMPANY</a>
+    </nav>
+    <a href="#contact" class="btn-join">無料相談</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+
+<!-- ==================== HERO (KV) ==================== -->
+<section id="hero">
+  <!-- 円モチーフ -->
+  <div class="circle circle-hero"></div>
+  <!-- 縦書きコピー -->
+  <p class="vertical-text">短期的利益より、長期的経験を。</p>
+
+  <div class="hero-inner">
+    <div class="hero-kv-text appear">Re.Origin</div>
+    <div class="hero-sub-wrap">
+      <h1 class="hero-catch appear d1">
+        営業は、才能ではなく<br>仕組みで変わる。
+      </h1>
+      <p class="hero-desc appear d2">
+        属人化を排除し、誰が担当しても成果が出る営業体制へ。<br>
+        集客・面談・クロージングを再現性ある仕組みに変える、<br>株式会社Re.Originの営業支援サービスです。
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="inner">
+    <p class="sec-label appear">About Us</p>
+    <h2 class="sec-title appear d1">私たちについて</h2>
+    <div class="about-grid">
+      <div>
+        <p class="about-body appear d2">
+          営業成果が一部のメンバーに偏っていませんか。トップ担当者が抜けると数字が落ちる、新人が育たない、成約率が安定しない——これらはすべて「仕組みの不在」が原因です。
+        </p>
+        <p class="about-body appear d3">
+          株式会社Re.Originは、営業プロセスの可視化・マニュアル化・PDCAの定着を通じて、誰が担当しても再現できる営業体制を構築します。貴社の現状ヒアリングから戦略設計・実行支援・効果測定まで、一気通貫で伴走します。
+        </p>
+        <p class="about-body appear d4">
+          「売れない理由」は才能の差ではなく、構造の問題です。集客・面談・クロージングの各フェーズを整理し、属人化に頼らない営業の仕組みをゼロから設計します。
+        </p>
+      </div>
+      <div class="about-right appear d3">
+        <div class="philosophy-block">
+          <p>「属人化をなくし、<br>仕組みで勝てる組織へ。」</p>
+        </div>
+        <p class="about-note">
+          営業力は才能ではなく、<br>
+          プロセスと再現性で育てるもの。<br>
+          私たちはその確信のもと、貴社の営業を変えます。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SERVICE ==================== -->
+<section id="service">
+  <div class="inner">
+    <div class="service-header">
+      <p class="sec-label appear">Service</p>
+      <h2 class="sec-title appear d1">サービス内容と<br>料金プラン</h2>
+      <p class="sec-desc appear d2">
+        営業基盤の構築から組織強化まで、貴社の課題フェーズに合わせた8つのプログラムをご用意しています。<br>
+        無料ヒアリング後に最適なプランをご提案しますので、まずはお気軽にご連絡ください。
+      </p>
+    </div>
+
+    <div class="plan-grid">
+
+      <div class="plan-card appear d1">
+        <p class="plan-num">PLAN 01</p>
+        <p class="plan-name">営業スタートダッシュ 集中プログラム</p>
+        <p class="plan-price">¥100,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：2週間</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>営業課題の現状分析と基本戦略の策定</li>
+          <li>集客〜成約までの営業全体フローの可視化</li>
+          <li>初期KPI・行動指標の設定と優先課題の整理</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d2">
+        <p class="plan-num">PLAN 02</p>
+        <p class="plan-name">SNSリード獲得 マスタープログラム</p>
+        <p class="plan-price">¥200,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：1ヶ月</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>SNSアカウント設計とプロフィール最適化支援</li>
+          <li>集客に特化したコンテンツ戦略の立案と発信支援</li>
+          <li>フォロワー獲得から面談予約への導線設計</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d3">
+        <p class="plan-num">PLAN 03</p>
+        <p class="plan-name">集客ファネル 設計プログラム</p>
+        <p class="plan-price">¥300,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：1ヶ月半</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>SNS・LINE・広告を活用した集客導線の一気通貫設計</li>
+          <li>スクリーニング強化と面談数最大化のオファー設計</li>
+          <li>フロント商品・無料相談への誘導導線の構築</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d4">
+        <p class="plan-num">PLAN 04</p>
+        <p class="plan-name">商談・ヒアリング マスタープログラム</p>
+        <p class="plan-price">¥400,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：2ヶ月</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>信頼構築型ヒアリング設計と商談フロー改善</li>
+          <li>商談ロールプレイング＆個別フィードバック（月2回）</li>
+          <li>商談録音分析による改善指導</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d1">
+        <p class="plan-num">PLAN 05</p>
+        <p class="plan-name">クロージング 完全習得プログラム</p>
+        <p class="plan-price">¥500,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：3ヶ月</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>価格・不安・競合比較への切り返し手法の設計</li>
+          <li>成約率を高めるトーク構造の構築支援</li>
+          <li>再現性あるクロージングプロセスの確立</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d2">
+        <p class="plan-num">PLAN 06</p>
+        <p class="plan-name">営業仕組み化 マスタープログラム</p>
+        <p class="plan-price">¥600,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：4ヶ月</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>集客〜成約プロセスのマニュアル化・テンプレート化</li>
+          <li>KPI設計と数値管理による営業PDCA構築サポート</li>
+          <li>月次個別コンサルティング（ZOOM・月2回）</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d3">
+        <p class="plan-num">PLAN 07</p>
+        <p class="plan-name">チーム営業 強化プログラム</p>
+        <p class="plan-price">¥700,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：5ヶ月</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>営業メンバーの採用基準・育成フロー設計支援</li>
+          <li>チーム共有トークスクリプト・営業マニュアルの構築</li>
+          <li>組織全体の営業力向上に向けたマネジメント支援</li>
+        </ul>
+      </div>
+
+      <div class="plan-card appear d4">
+        <p class="plan-num">PLAN 08</p>
+        <p class="plan-name">完全伴走 フルサポートパッケージ</p>
+        <p class="plan-price">¥800,000 <span>（税込）</span></p>
+        <p class="plan-period">提供期間：6ヶ月</p>
+        <hr class="plan-divider">
+        <ul class="plan-content">
+          <li>集客・商談・クロージングの一気通貫フルサポート</li>
+          <li>週次個別コンサルティング（ZOOM）</li>
+          <li>事業フェーズに応じた戦略設計と継続的改善支援</li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="plan-note appear">
+      ※ 本サービスに示された表現や再現性には個人差があり、必ずしも利益や効果を保証するものではありません。<br>
+      ※ お支払い方法：クレジットカード払い（VISA・MasterCard・JCB）/ 銀行振込
+    </p>
+  </div>
+</section>
+
+
+<!-- ==================== FLOW ==================== -->
+<section id="flow">
+  <div class="inner">
+    <p class="sec-label appear">Flow</p>
+    <h2 class="sec-title appear d1">ご支援の流れ</h2>
+    <div class="flow-list">
+
+      <div class="flow-item appear d1">
+        <div class="flow-num">01</div>
+        <div class="flow-body">
+          <h4>お問い合わせ・無料ヒアリング</h4>
+          <p>まずはメールまたはお電話にてご連絡ください。貴社の現状・課題・目標をZOOMにてヒアリングします（無料・約60分）。</p>
+        </div>
+      </div>
+
+      <div class="flow-item appear d2">
+        <div class="flow-num">02</div>
+        <div class="flow-body">
+          <h4>プランのご提案・ご選択</h4>
+          <p>ヒアリング内容をもとに、貴社の課題フェーズに最適なプランをご提案します。ご納得の上でプランをお選びください。</p>
+        </div>
+      </div>
+
+      <div class="flow-item appear d3">
+        <div class="flow-num">03</div>
+        <div class="flow-body">
+          <h4>お申し込み・ご契約</h4>
+          <p>メールまたはお電話にてご契約手続きを行います。契約内容・料金・提供期間を書面にてご確認いただきます。</p>
+        </div>
+      </div>
+
+      <div class="flow-item appear d4">
+        <div class="flow-num">04</div>
+        <div class="flow-body">
+          <h4>お支払い</h4>
+          <p>クレジットカード決済または銀行振込にてお支払いください。お申し込み後5日以内のお支払いをお願いしております。</p>
+        </div>
+      </div>
+
+      <div class="flow-item appear d5">
+        <div class="flow-num">05</div>
+        <div class="flow-body">
+          <h4>支援開始案内の送付</h4>
+          <p>お支払い確認後、1営業日以内にコンサルティング開始に関するご案内（ZOOM日程・LINE登録情報等）をメールにてお送りします。</p>
+        </div>
+      </div>
+
+      <div class="flow-item appear d6">
+        <div class="flow-num">06</div>
+        <div class="flow-body">
+          <h4>コンサルティング開始</h4>
+          <p>ZOOMによる個別コンサルティング・LINEでの質問対応・メールでの資料共有を通じて、貴社の営業改善を伴走支援します。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== FAQ ==================== -->
+<section id="faq">
+  <div class="inner">
+    <p class="sec-label appear">FAQ</p>
+    <h2 class="sec-title appear d1">よくある質問</h2>
+    <div class="faq-list">
+
+      <div class="faq-item appear d1">
+        <div class="faq-q"><span class="q-label">Q.</span>どのような企業が対象ですか？</div>
+        <p class="faq-a">中小企業・個人事業主を主な対象としています。業種・業界は問いません。「新規顧客獲得ができていない」「営業の仕組みがない」「商談が成約につながらない」といった課題をお持ちの事業者様にご活用いただけます。</p>
+      </div>
+
+      <div class="faq-item appear d2">
+        <div class="faq-q"><span class="q-label">Q.</span>すべてオンラインで完結しますか？</div>
+        <p class="faq-a">はい、すべてオンラインで完結します。ZOOMでの個別コンサルティング、LINEでの質問対応、メールでの資料共有を通じてご支援します。</p>
+      </div>
+
+      <div class="faq-item appear d3">
+        <div class="faq-q"><span class="q-label">Q.</span>どのプランを選べばよいかわかりません。</div>
+        <p class="faq-a">無料ヒアリングにて貴社の現状・課題を確認した上で、最適なプランをご提案します。まずはお気軽にお問い合わせください。</p>
+      </div>
+
+      <div class="faq-item appear d4">
+        <div class="faq-q"><span class="q-label">Q.</span>クレジットカードの分割払いはできますか？</div>
+        <p class="faq-a">はい、ご利用のクレジットカードによる分割払いが可能です。なお、分割手数料はお客様のご負担となります。</p>
+      </div>
+
+      <div class="faq-item appear d5">
+        <div class="faq-q"><span class="q-label">Q.</span>契約のキャンセルはできますか？</div>
+        <p class="faq-a">ご契約日（契約書を受け取った日）を含めて20日以内であれば、お申し込み・ご契約の解除が可能です。詳細は特定商取引法に基づく表記をご確認ください。</p>
+      </div>
+
+      <div class="faq-item appear d6">
+        <div class="faq-q"><span class="q-label">Q.</span>成果は保証されますか？</div>
+        <p class="faq-a">成果・利益を保証するものではありません。貴社の状況や取り組み方によって結果は異なります。ただし、各プランで明確なアクションプランを設計し、目標達成に向けた伴走支援を徹底いたします。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== COMPANY ==================== -->
+<section id="company">
+  <div class="inner">
+    <p class="sec-label appear">Company</p>
+    <h2 class="sec-title appear d1">会社情報</h2>
+    <table class="company-table appear d2">
+      <tr>
+        <th>会社名</th>
+        <td>株式会社Re.Origin</td>
+      </tr>
+      <tr>
+        <th>代表者名</th>
+        <td>代表取締役 谷水勢・田中良介</td>
+      </tr>
+      <tr>
+        <th>所在地</th>
+        <td>〒156-0043<br>東京都世田谷区松原2-37-18</td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td>070-2324-5408<br><span style="font-size:12px;color:var(--gray-dk);">受付時間：10:00〜19:00</span></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td>re.origin.tanimizu@gmail.com</td>
+      </tr>
+      <tr>
+        <th>設立</th>
+        <td>2026年4月1日</td>
+      </tr>
+      <tr>
+        <th>事業内容</th>
+        <td>営業代行事業 / 集客・営業コンサルティング</td>
+      </tr>
+      <tr>
+        <th>資本金</th>
+        <td>30万円</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="inner">
+    <p class="sec-label appear" style="color:rgba(255,255,255,0.6);">Contact</p>
+    <h2 class="contact-heading appear d1">お問い合わせ・<br>無料相談はこちら</h2>
+    <p class="contact-note appear d2">
+      どのようなご支援が必要か不明な場合も、まずはお気軽にご相談ください。<br>
+      貴社の現状・課題をヒアリングし、最適なプランをご提案します。
+    </p>
+    <div class="contact-btns appear d3">
+      <a href="mailto:re.origin.tanimizu@gmail.com" class="btn-white-solid">メールで相談する</a>
+      <a href="tel:070-2324-5408" class="btn-outline-white">電話で相談する</a>
+    </div>
+    <div class="contact-info appear d4">
+      <p>株式会社Re.Origin</p>
+      <p>〒156-0043 東京都世田谷区松原2-37-18</p>
+      <p>TEL：070-2324-5408　／　MAIL：re.origin.tanimizu@gmail.com</p>
+      <p style="margin-top:10px;">
+        <a href="tokusho.html">特定商取引法に基づく表記</a>　／
+        <a href="privacy.html">プライバシーポリシー</a>　／
+        <a href="terms.html">利用規約</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-logo">Re.Origin</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#service">Service</a>
+    <a href="#flow">Flow</a>
+    <a href="#company">Company</a>
+    <a href="#contact">Contact</a>
+    <a href="tokusho.html">特商法</a>
+    <a href="privacy.html">プライバシー</a>
+    <a href="terms.html">利用規約</a>
+  </div>
+  <p class="footer-copy">© 2026 Re.Origin Inc. All Rights Reserved.</p>
+</footer>
+
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  // Intersection Observer: appear
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.appear').forEach(el => observer.observe(el));
+
+  // Header scroll style
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const nav = document.querySelector('nav');
+    const isOpen = nav.style.display === 'flex';
+    nav.style.cssText = isOpen
+      ? ''
+      : 'display:flex;flex-direction:column;position:fixed;top:80px;left:0;right:0;background:#fff;padding:24px 5%;gap:24px;border-bottom:1px solid #ddd;z-index:199;';
+  }
+</script>
+</body>
+</html>
